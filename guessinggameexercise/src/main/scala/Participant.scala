@@ -1,8 +1,9 @@
 class Participant(maxNumAttempts: Int,numOfRuns: Int):
   var totalNumAttempts = 0
   var totalNumFailures = 0
+  var oracle: Oracle = Oracle()
   def play(strategy: Strategy): Unit =
-    val oracle: Oracle = Oracle()
+
     var i=0
     for i <- 1 to numOfRuns do
       //println(totalNumAttempts)

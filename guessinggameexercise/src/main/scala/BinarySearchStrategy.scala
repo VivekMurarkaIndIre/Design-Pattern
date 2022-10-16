@@ -15,7 +15,6 @@ class BinarySearchStrategy(maxNumAttempts: Int) extends Strategy(maxNumAttempts)
       else // result == Assessment.GreaterThan
         lower = guess + 1
       end if
-    end while
     isSuccessfulGuess(guessedCorrectly)
 
 }

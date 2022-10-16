@@ -18,4 +18,3 @@ class SmartRandomStrategy (maxNumAttempts: Int) extends Strategy(maxNumAttempts)
     isSuccessfulGuess(guessedCorrectly)
 
 }
-
