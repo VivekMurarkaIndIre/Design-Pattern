@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+main -> Participant: Calls play() method to start guessing
+autonumber stop
+main -> Participant: Provide Strategy object at run time
+autonumber resume
+Participant -> Strategy: Iterate unless guess correctly and Calls useStrategy()
+autonumber stop
+Participant -> Strategy: communicate with object using Strategy interface
+autonumber resume
+Strategy -> Participant: Provide number of attempts in each iteration guess correctly
+Participant -> main: Return total number of attempts and failed attempt it took to guess
+main ->o main: Display the final result
+@enduml
