@@ -1,4 +1,4 @@
-## sbt project compiled with Scala 3
+## Assignment 4: Observer Pattern project compiled with Scala 3
 
 ### Usage
 
