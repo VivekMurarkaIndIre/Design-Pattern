@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+main -> main: Instantiates Observer(Auditor) object and attach them.
+main -> Participant: Instantiates Participant object which call play() method to start guessing
+main -> Observer: Notifies Observer that participant is playing
+autonumber stop
+main -> Participant: Provide Strategy object at run time
+autonumber resume
+Participant -> Strategy: Iterate unless guess correctly and Calls useStrategy()
+autonumber stop
+Participant -> Strategy: communicate with object using Strategy interface
+autonumber resume
+Strategy -> Participant: Provide number of attempts in each iteration guess correctly
+Observer -> Participant: Pulls the name, age, strategy and avg. attempts of participants
+Observer ->o Observer: Raise alarm is find anything suspicious
+Participant -> main: Return avg number of attempts it took to guess
+main ->o main: Logs the final result and detaches all the observer
+@enduml

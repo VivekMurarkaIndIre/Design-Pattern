@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class "Main(ConcreteSubject)" as Main {
+ main()
+}
+class "Participant" as Participant{
+    play()
+}
+class "Auditor(ConcreteObserver)" as Auditor {
+    notification()
+}
+interface Observable{
+    observers()
+    attach()
+    detach()
+    notifyObserver()
+}
+interface Observer{
+    notification()
+}
+
+Observable <|-- Main
+Observable -> Observer
+Auditor -|> Observer
+Auditor --> Participant : subject
+Main -> Participant : Instantiates
+Main -> Auditor : Add/detach/notifies
+
+
+
+
+@enduml
