@@ -1,3 +1,5 @@
+package Exercise1
+
 //
 // COMP40070 ABSTRACT FACTORY EXERCISE
 // 
@@ -15,7 +17,6 @@ class Client:
 
 
 abstract class Product{
-  //def createProduct(): Product
   def doSomeWork(): Unit
 }
 

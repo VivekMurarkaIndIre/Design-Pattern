@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class "Product(Abstract)" as Product {
+   doSomeWork():Unit
+}
+class "ProductA(Concrete Product)" as ProductA {
+   doSomeWork():Unit
+   doYourStuff():Unit
+}
+class "ProductB(Concrete Product)" as ProductB {
+   doSomeWork():Unit
+   doIt():Unit
+}
+class "ProductC(Concrete Product)" as ProductC {
+   doSomeWork():Unit
+   perform(): Unit
+}
+
+object "Product(Creator Object)" as Object{
+    apply(String): Product
+}
+
+class "Client" as Client {
+   product= Product
+   foo():Unit
+}
+Product <|-- ProductA
+Product <|-- ProductB
+Product <|-- ProductC
+
+Product <. Object
+
+Object <. Client
+
+
+
+
+
+
+
+@enduml

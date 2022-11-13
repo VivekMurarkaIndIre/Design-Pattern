@@ -1,0 +1,116 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+together {
+interface "ProductFactory" as ProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
+class "Client(ProductFactory)" as Client {
+   product= Product
+   foo():Unit
+}
+}
+
+together {
+class "CoolProductFactory" as CoolProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
+
+class "NormalProductFactory" as NormalProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
+}
+interface "Product" as Product {
+    doSomeWork(): Unit
+}
+
+
+
+together {
+class "CoolProductA(Concrete Product A)" as CoolProductA {
+   doSomeWork():Unit
+   doYourStuff():Unit
+}
+class "CoolProductB(Concrete Product B)" as CoolProductB {
+   doSomeWork():Unit
+   doIt():Unit
+}
+
+class "CoolProductC(Concrete Product C)" as CoolProductC {
+   doSomeWork():Unit
+   perform():Unit
+}
+}
+together {
+class "NormalProductA(Concrete Product A)" as NormalProductA {
+   doSomeWork():Unit
+   doYourStuff():Unit
+}
+
+class "NormalProductB(Concrete Product B)" as NormalProductB {
+   doSomeWork():Unit
+   doIt():Unit
+}
+
+class "NormalProductC(Concrete Product C)" as NormalProductC {
+   doSomeWork():Unit
+   perform():Unit
+}
+}
+
+abstract "ProductA(Abstract Product A)" as ProductA {
+   doSomeWork():Unit
+}
+abstract "ProductB(Abstract Product B)" as ProductB {
+   doSomeWork():Unit
+}
+abstract "ProductC(Abstract Product C)" as ProductC {
+   doSomeWork():Unit
+}
+
+
+CoolProductFactory <.. CoolProductA
+CoolProductFactory <.. CoolProductB
+CoolProductFactory <.. CoolProductC
+
+NormalProductFactory ..> NormalProductA
+NormalProductFactory ..> NormalProductB
+NormalProductFactory ..> NormalProductC
+
+ProductFactory <|-- CoolProductFactory
+ProductFactory <|-- NormalProductFactory
+
+CoolProductA --|> ProductA
+CoolProductB --|> ProductB
+NormalProductA --|> ProductA
+
+
+NormalProductB --|> ProductB
+
+CoolProductC --|> ProductC
+NormalProductC --|> ProductC
+
+ProductA --|> Product
+ProductB --|> Product
+ProductC --|> Product
+
+Client ..> ProductFactory
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
