@@ -127,7 +127,7 @@ object ProductC {
 }
 
 @main def main(): Unit =
-  println("Enter 1 for Cool and 2 for uncool")
+  println("Enter 1 for Cool and 2 for Normal")
   val input = scala.io.StdIn.readInt()
   var productFactory: ProductFactory= null
   if(input == 1){
