@@ -1,4 +1,4 @@
-import Exercise1.Product
+
 //
 // COMP40070 ABSTRACT FACTORY EXERCISE
 //
