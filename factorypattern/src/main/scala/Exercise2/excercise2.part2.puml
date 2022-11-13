@@ -1,0 +1,90 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+together {
+class "CoolProductFactory" as CoolProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
+
+CoolProductFactory -|> ProductFactory
+
+ProductFactory <|- NormalProductFactory
+interface "ProductFactory" as ProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
+
+class "NormalProductFactory" as NormalProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
+}
+
+
+together {
+class "CoolProductA(Concrete Product A)" as CoolProductA {
+   doSomeWork():Unit
+   doYourStuff():Unit
+}
+
+abstract "ProductA(Abstract Product A)" as ProductA {
+   doSomeWork():Unit
+}
+
+class "NormalProductA(Concrete Product A)" as NormalProductA {
+   doSomeWork():Unit
+   doYourStuff():Unit
+}
+
+CoolProductA --|> ProductA
+NormalProductA --|> ProductA
+
+}
+
+together {
+class "CoolProductB(Concrete Product B)" as CoolProductB {
+   doSomeWork():Unit
+   doIt():Unit
+}
+abstract "ProductB(Abstract Product B)" as ProductB {
+   doSomeWork():Unit
+}
+class "NormalProductB(Concrete Product B)" as NormalProductB {
+   doSomeWork():Unit
+   doIt():Unit
+}
+CoolProductB --|> ProductB
+NormalProductB --|> ProductB
+}
+
+
+
+together {
+class "CoolProductC(Concrete Product C)" as CoolProductC {
+   doSomeWork():Unit
+   perform():Unit
+}
+abstract "ProductC(Abstract Product C)" as ProductC {
+   doSomeWork():Unit
+}
+class "NormalProductC(Concrete Product C)" as NormalProductC {
+   doSomeWork():Unit
+   perform():Unit
+}
+CoolProductC --|> ProductC
+NormalProductC --|> ProductC
+}
+
+CoolProductFactory <.. CoolProductA
+CoolProductFactory <.. CoolProductB
+CoolProductFactory <.. CoolProductC
+
+NormalProductFactory ..> NormalProductA
+NormalProductFactory ..> NormalProductB
+NormalProductFactory ..> NormalProductC
+
+@enduml

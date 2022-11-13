@@ -14,17 +14,9 @@ class "Client(ProductFactory)" as Client {
 }
 
 together {
-class "CoolProductFactory" as CoolProductFactory {
-   createProductA():Unit
-   createProductB():Unit
-   createProductC():Unit
-}
 
-class "NormalProductFactory" as NormalProductFactory {
-   createProductA():Unit
-   createProductB():Unit
-   createProductC():Unit
-}
+
+
 }
 interface "Product" as Product {
     doSomeWork(): Unit
@@ -33,6 +25,12 @@ interface "Product" as Product {
 
 
 together {
+
+class "CoolProductFactory" as CoolProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
 class "CoolProductA(Concrete Product A)" as CoolProductA {
    doSomeWork():Unit
    doYourStuff():Unit
@@ -48,6 +46,12 @@ class "CoolProductC(Concrete Product C)" as CoolProductC {
 }
 }
 together {
+
+class "NormalProductFactory" as NormalProductFactory {
+   createProductA():Unit
+   createProductB():Unit
+   createProductC():Unit
+}
 class "NormalProductA(Concrete Product A)" as NormalProductA {
    doSomeWork():Unit
    doYourStuff():Unit
