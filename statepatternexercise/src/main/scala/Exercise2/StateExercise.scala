@@ -1,4 +1,4 @@
-package Excercise2
+package Exercise2
 
 abstract class PersonState(){
   def vote(age: Int): Unit
