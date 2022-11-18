@@ -49,7 +49,7 @@ class Person:
     state.conscript(age)
 
 
-@main def hello: Unit =
+@main def main(): Unit =
   val p = Person()
   for i <- 1 to 80 do
     p.incrementAge()
