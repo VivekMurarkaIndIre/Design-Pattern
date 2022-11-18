@@ -45,7 +45,6 @@ class Pensioner(person: Person) extends PersonState(person){
 }
 
 class Teenager(person: Person) extends PersonState(person){
-
   override def transitionState(): Unit =
     if (person.age == 18) then
       person.changeState(new Adult(person))

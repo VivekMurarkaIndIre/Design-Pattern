@@ -1,22 +1,14 @@
 package Exercise5
 
-import Exercise5.PersonState.{Child, Teenager}
-
-
 abstract class PersonState(){
 
   def transitionState(age: Int): PersonState = Child
-
-
-
 
   def vote(age: Int): Unit
   def applyForBuspass(age: Int): Unit
   def conscript(age: Int): Unit
   def applyForMedicalCard(age: Int): Unit
 }
-
-object PersonState{
 
   object Child extends PersonState{
 
@@ -70,29 +62,20 @@ object PersonState{
     override def applyForMedicalCard(age: Int): Unit = println(s"$age: Medical Card not granted")
   }
 
-}
-
-
-
-
 
 class Person:
   var age = 0
   var state :PersonState = Child
 
-
   def incrementAge() =
     age += 1
     state = state.transitionState(age)
-
-
 
   def canPerform(): Unit=
     state.vote(age)
     state.applyForBuspass(age)
     state.conscript(age)
     state.applyForMedicalCard(age)
-
 
 @main def main(): Unit =
   val p = Person()
