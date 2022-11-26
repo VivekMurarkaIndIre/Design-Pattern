@@ -1,4 +1,4 @@
-package Exercise3
+package Exercise4
 
 trait Visitor:
   def traverse(node:BinaryOperatorNode): String
@@ -22,6 +22,8 @@ class ConcreteVisitInfixTreeEvaluation extends Visitor:
       result= ((node.leftNode.traverse).toInt + (node.rightNode.traverse).toInt).toString
     else if(node.label=="*")
       result = ((node.leftNode.traverse).toInt * ( node.rightNode.traverse).toInt).toString
+    else if (node.label == "%")
+      result = ((node.leftNode.traverse).toInt % (node.rightNode.traverse).toInt).toString
     else
       result = node.label
 
@@ -40,9 +42,11 @@ abstract class BinaryOperatorNode(left: Node, right: Node,visitor:Visitor  ) ext
 class AdditionNode(left: Node, right: Node,visitor:Visitor ) extends BinaryOperatorNode(left, right,visitor):
   val label = "+"
 
-
 class MultiplicationNode(left: Node, right: Node,visitor:Visitor ) extends BinaryOperatorNode(left, right,visitor):
   val label = "*"
+
+class ModulusNode(left: Node, right: Node,visitor:Visitor ) extends BinaryOperatorNode(left, right,visitor):
+  val label = "%"
 
 
 class LeafNode(override val label: String) extends Node:
@@ -67,4 +71,13 @@ class LeafNode(override val label: String) extends Node:
   visitor = new ConcreteVisitInfixTreeEvaluation()
   println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode(a), LeafNode(b),visitor), LeafNode(c),visitor),LeafNode("7"),visitor).traverse)
 
+
+  println("Infix Traversal witH Modulus:")
+  visitor = new ConcreteInfixVisitor()
+
+  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode("a"), LeafNode("b"), visitor), LeafNode("c"), visitor), ModulusNode (LeafNode("13"),LeafNode("6"),visitor), visitor).traverse)
+
+  println("Infix Traversal Evaluation with Modulus:")
+  visitor = new ConcreteVisitInfixTreeEvaluation()
+  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode(a), LeafNode(b), visitor), LeafNode(c), visitor), ModulusNode (LeafNode("13"),LeafNode("6"),visitor), visitor).traverse)
 
