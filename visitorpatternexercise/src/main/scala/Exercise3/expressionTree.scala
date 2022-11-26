@@ -1,4 +1,4 @@
-package Exercise2
+package Exercise3
 
 trait Visitor:
   def traverse(node:BinaryOperatorNode): String
@@ -13,6 +13,19 @@ class ConcretePostfixVisitor extends Visitor:
     val postfix: String =   node.leftNode.traverse + " "  + node.rightNode.traverse + " " + node.label
     postfix.toString
 
+
+
+class ConcreteVisitInfixTreeEvaluation extends Visitor:
+  override def traverse(node: BinaryOperatorNode): String=
+    var result: String=""
+    if(node.label=="+")
+      result= ((node.leftNode.traverse).toInt + (node.rightNode.traverse).toInt).toString
+    else if(node.label=="*")
+      result = ((node.leftNode.traverse).toInt * ( node.rightNode.traverse).toInt).toString
+    else
+      result = node.label
+
+    result
 
 abstract class Node:
   def label: String
@@ -37,12 +50,20 @@ class LeafNode(override val label: String) extends Node:
 
 @main def main(): Unit =
 
-  println("Infix Traversal:")
-  var visitor:Visitor = new ConcreteInfixVisitor()
 
-  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode("a"), LeafNode("b"),visitor), LeafNode("c"),visitor),LeafNode("7"),visitor).traverse)
+  println("Infix Traversal:")
+  var visitor: Visitor = new ConcreteInfixVisitor()
+
+  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode("a"), LeafNode("b"), visitor), LeafNode("c"), visitor), LeafNode("7"), visitor).traverse)
   println("Postfix Traversal:")
   visitor = new ConcretePostfixVisitor()
   println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode("a"), LeafNode("b"), visitor), LeafNode("c"), visitor), LeafNode("7"), visitor).traverse)
+
+
+  var a = "5"
+  var b="6"
+  var c="10"
+  visitor = new ConcreteVisitInfixTreeEvaluation()
+  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode(a), LeafNode(b),visitor), LeafNode(c),visitor),LeafNode("7"),visitor).traverse)
 
 
