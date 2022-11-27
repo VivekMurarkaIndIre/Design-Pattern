@@ -20,7 +20,7 @@ case class ConcreteBinaryPostfixVisitor(node: Node) extends Visitor:
     else
       node.label
 
-
+//Cre
 abstract class Node:
   def label: String
   var traverse: String=null
@@ -35,9 +35,6 @@ abstract class BinaryOperatorNode(left: Node, right: Node) extends Node:
   var leftNode: Node = left
   var rightNode: Node = right
 
-
-
-
 class AdditionNode(left: Node, right: Node) extends BinaryOperatorNode(left, right):
   val label = "+"
 
@@ -47,13 +44,9 @@ class MultiplicationNode(left: Node, right: Node) extends BinaryOperatorNode(lef
 class ModulusNode(left: Node, right: Node) extends BinaryOperatorNode(left, right):
   val label = "%"
 
-
 class LeafNode(override val label: String) extends Node:
   traverse = label
-
-
-
-
+  
 @main def main(): Unit =
 
 

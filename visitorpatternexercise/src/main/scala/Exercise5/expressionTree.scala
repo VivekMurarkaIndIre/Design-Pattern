@@ -46,4 +46,4 @@ class LeafNode(override val label: String) extends Node:
   var node3 = AdditionNode(node2, LeafNode("7"))
   node3.accept(visitor)
   println(node3.infix)
-  println(visitor.nodeCount)
+  println("Number of Additional Nodes:  "+visitor.nodeCount)
