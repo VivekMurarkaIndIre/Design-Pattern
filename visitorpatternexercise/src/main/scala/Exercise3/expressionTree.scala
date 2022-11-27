@@ -1,7 +1,10 @@
 package Exercise3
 
+import java.util
 trait Visitor:
-  def traverse(node:BinaryOperatorNode): String
+  def traverse(node: BinaryOperatorNode): String
+  def assignleaf(node: LeafNode): String =
+    node.label
 
 class ConcreteInfixVisitor extends Visitor:
   override def traverse(node: BinaryOperatorNode): String=
@@ -29,42 +32,70 @@ class ConcreteVisitInfixTreeEvaluation extends Visitor:
 
 abstract class Node:
   def label: String
-  def traverse: String
+  var traverse: String=null
+  def accept(visitor: Visitor):Unit
 
-abstract class BinaryOperatorNode(left: Node, right: Node,visitor:Visitor  ) extends Node:
+abstract class BinaryOperatorNode(left: Node, right: Node) extends Node:
   var leftNode: Node = left
   var rightNode: Node = right
-  def traverse = visitor.traverse(this)
 
 
-class AdditionNode(left: Node, right: Node,visitor:Visitor ) extends BinaryOperatorNode(left, right,visitor):
+
+
+class AdditionNode(left: Node, right: Node) extends BinaryOperatorNode(left, right):
   val label = "+"
+  override def accept(visitor: Visitor): Unit =
+    traverse = visitor.traverse(this)
 
-
-class MultiplicationNode(left: Node, right: Node,visitor:Visitor ) extends BinaryOperatorNode(left, right,visitor):
+class MultiplicationNode(left: Node, right: Node) extends BinaryOperatorNode(left, right):
   val label = "*"
+  override def accept(visitor: Visitor): Unit =
+    traverse = visitor.traverse(this)
 
 
 class LeafNode(override val label: String) extends Node:
-  def traverse = label
+  traverse = label
+
+  override def accept(visitor: Visitor): Unit =
+    traverse = visitor.assignleaf(this)
+
 
 @main def main(): Unit =
 
+  var node1 = AdditionNode(LeafNode("a"), LeafNode("b"))
+  var node2 = MultiplicationNode(node1, LeafNode("c"))
+  var node3 = AdditionNode(node2, LeafNode("7"))
 
+  var list = new util.ArrayList[Node]()
+  list.add(node1)
+  list.add(node2)
+  list.add(node3)
   println("Infix Traversal:")
   var visitor: Visitor = new ConcreteInfixVisitor()
-
-  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode("a"), LeafNode("b"), visitor), LeafNode("c"), visitor), LeafNode("7"), visitor).traverse)
+  list.forEach(_.accept(visitor))
+  println(node3.traverse)
   println("Postfix Traversal:")
   visitor = new ConcretePostfixVisitor()
-  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode("a"), LeafNode("b"), visitor), LeafNode("c"), visitor), LeafNode("7"), visitor).traverse)
 
+  list.forEach(_.accept(visitor))
 
-  var a = "5"
-  var b="6"
-  var c="10"
+  println(node3.traverse)
+
+  val a = "5"
+  val b="6"
+  val c="10"
   println("Infix Traversal Evaluation:")
-  visitor = new ConcreteVisitInfixTreeEvaluation()
-  println(AdditionNode(MultiplicationNode(AdditionNode(LeafNode(a), LeafNode(b),visitor), LeafNode(c),visitor),LeafNode("7"),visitor).traverse)
+   node1 = AdditionNode(LeafNode(a), LeafNode(b))
+   node2 = MultiplicationNode(node1, LeafNode(c))
+   node3 = AdditionNode(node2, LeafNode("7"))
 
+  list = new util.ArrayList[Node]()
+  list.add(node1)
+  list.add(node2)
+  list.add(node3)
+
+  visitor = new ConcreteVisitInfixTreeEvaluation()
+  list.forEach(_.accept(visitor))
+
+  println(node3.traverse)
 
